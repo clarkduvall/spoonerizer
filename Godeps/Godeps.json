@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/clarkduvall/nackerhews",
+	"ImportPath": "github.com/clarkduvall/spoonerizer",
 	"GoVersion": "go1.4.2",
 	"Deps": [
 		{

@@ -5,12 +5,7 @@ import (
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 	"io"
-	"net/url"
 )
-
-const BaseURL = "https://news.ycombinator.com"
-
-var ParsedBaseURL, _ = url.Parse(BaseURL)
 
 type bufferCloser struct {
 	bytes.Buffer
@@ -20,7 +15,7 @@ func (b *bufferCloser) Close() error {
 	return nil
 }
 
-func SpoonerizeHTML(r io.Reader) io.ReadCloser {
+func SpoonerizeHTML(r io.Reader, extraHTML string) io.ReadCloser {
 	doc, _ := html.Parse(r)
 	var f func(*html.Node)
 	f = func(n *html.Node) {
@@ -36,6 +31,15 @@ func SpoonerizeHTML(r io.Reader) io.ReadCloser {
 
 		for c := n.FirstChild; c != nil; c = c.NextSibling {
 			f(c)
+		}
+
+		if n.DataAtom == atom.Body {
+			if extraHTML != "" {
+				nodes, _ := html.ParseFragment(bytes.NewBufferString(extraHTML), nil)
+				for _, node := range nodes {
+					n.AppendChild(node)
+				}
+			}
 		}
 	}
 	f(doc)
