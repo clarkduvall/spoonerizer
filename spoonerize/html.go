@@ -35,7 +35,7 @@ func SpoonerizeHTML(r io.Reader, extraHTML string) io.ReadCloser {
 
 		if n.DataAtom == atom.Body {
 			if extraHTML != "" {
-				nodes, _ := html.ParseFragment(bytes.NewBufferString(extraHTML), nil)
+				nodes, _ := html.ParseFragment(bytes.NewBufferString(extraHTML), n)
 				for _, node := range nodes {
 					n.AppendChild(node)
 				}

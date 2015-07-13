@@ -15,6 +15,8 @@ func assertSpoonerized(t *testing.T, s1 string, s2 string) {
 }
 
 func TestSpoonerize(t *testing.T) {
+	assertSpoonerized(t, "", "")
+	assertSpoonerized(t, " ", " ")
 	assertSpoonerized(t, "hello world", "wello horld")
 	assertSpoonerized(t, "Hello World", "Wello Horld")
 	assertSpoonerized(t, "Hello world", "Wello horld")
