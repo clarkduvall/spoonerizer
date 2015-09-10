@@ -1,0 +1,11 @@
+{
+  "name": "spoonerizer",
+  "description": "Spoonerize everything",
+  "keywords": [
+    "spoonerizer",
+    "go",
+  ],
+  "image": "heroku/go:latest",
+  "mount_dir": "src/github.com/clarkduvall/spoonerizer",
+  "repository": "https://github.com/clarkduvall/spoonerizer"
+}
